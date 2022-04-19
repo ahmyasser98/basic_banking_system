@@ -1,0 +1,26 @@
+const express = require('express');
+const dotenv = require('dotenv');
+const morgan = require('morgan');
+const bodyParser = require('body-parser');
+const path = require('path');
+const connectDB = require('./server/database/connection');
+
+const app = express();
+
+dotenv.config({path:'config.env'});
+const port = process.env.port||3000;
+
+app.use(morgan('tiny'));
+
+connectDB();
+
+app.use(bodyParser.urlencoded({extended: true}));
+
+app.set("view engine", "ejs");
+
+app.use('/img', express.static(path.resolve(__dirname, "views/img")));
+app.use('/js', express.static(path.resolve(__dirname, "assets/js")));
+
+app.use('/', require('./server/routes/router'));
+
+app.listen(port, () => console.log(`listening on port ${port}`));

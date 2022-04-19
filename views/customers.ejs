@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+      <style>
+        .white{
+          position: relative;
+          color: white;
+          right: -10px;
+        }
+        .pages{
+          position: relative;
+          right: -1000px;
+        }
+        tr[data-href] {
+          cursor: pointer;
+        }
+      </style>
+      <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Customers</title>
+        <link rel="shortcut icon" type="image/x-icon" href="img/icon.png" />
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+          <div class="container-fluid">
+            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-bank white" viewBox="0 0 16 16">
+              <path d="M8 .95 14.61 4h.89a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.5.5H15v7a.5.5 0 0 1 .485.379l.5 2A.5.5 0 0 1 15.5 17H.5a.5.5 0 0 1-.485-.621l.5-2A.5.5 0 0 1 1 14V7H.5a.5.5 0 0 1-.5-.5v-2A.5.5 0 0 1 .5 4h.89L8 .95zM3.776 4h8.447L8 2.05 3.776 4zM2 7v7h1V7H2zm2 0v7h2.5V7H4zm3.5 0v7h1V7h-1zm2 0v7H12V7H9.5zM13 7v7h1V7h-1zm2-1V5H1v1h14zm-.39 9H1.39l-.25 1h13.72l-.25-1z"/>
+            </svg>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav me-auto mb-2 mb-lg-0 pages">
+                <li class="nav-item">
+                  <a class="nav-link active" aria-current="page" href="/home">Home</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link active" aria-current="page" href="/customers">Customers</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link active" aria-current="page" href="/transfer">Transfer Money</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link active" aria-current="page" href="/history">Transfer History</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link active" aria-current="page" href="/about">About</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+      </head>
+      <style media="screen">
+        body{
+          background-color: #F8F8FF;
+        }
+        #footer{
+          position: fixed;
+          padding: 10px 10px 0px 10px;
+          bottom: 0;
+          text-align: center;
+          text-emphasis-color: black;
+          width: 100%;
+          height: 40px;
+          background-color: white;
+        }
+      </style>
+      <body>
+        <div class="container pt-2 pb-2">
+          <table class="table table-striped" id="myTable">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">Email</th>
+                <th scope="col">Phone Number</th>
+                <th scope="col">Balance</th>
+                <th scope="col"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <%for(var i=0;i < customers.length;i++){%>
+              <!-- <form action="/view_customer/<%=customers[i]._id%>"> -->
+              <tr id="<%=customers[i]._id%>">
+                <th scope="row"><%=i+1%></th>
+                <td class="row-data"><%=customers[i].name%></td>
+                <td class="row-data"><%=customers[i].email%></td>
+                <td class="row-data"><%=customers[i].phone%></td>
+                <td class="row-data"><%=customers[i].balance%></td>
+                <td><a class="btn btn-primary" href="/view_customer/<%=customers[i]._id%>">View</a></td>
+              </tr>
+              <!-- </form> -->
+              <%}%>
+            </tbody>
+          </table>
+        </div>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const rows = document.querySelectorAll("tr[data-href]");
+        rows.forEach(row => {
+          row.addEventListener("click", () => {
+            window.location.href = row.dataset.href;
+          });
+        });
+      });
+    </script>
+    <script>
+      function passvalues() {
+        var name = document.getElementById("name").value;
+        var email = document.getElementById("email").value;
+        var phone = document.getElementById("phone").value;
+        var balance = document.getElementById("balance").value;
+      }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+  </body>
+  <footer>
+    <div id="footer">
+      <p>Copyright © Ahmed Yasser 2022</p>
+    </div>
+  </footer>
+</html>
